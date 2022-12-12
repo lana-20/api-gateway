@@ -42,7 +42,12 @@ __Disadvantages of using API GW pattern__
 <img src="https://user-images.githubusercontent.com/70295997/207112873-ba7cbe49-5c53-4832-802f-a3de327606ec.png" width=600>
 
 2. How many of these API GWs do I need? Do I just create one? One can be a problem. I build MSs with fault tolerance and redundancy in mind, so even if some of these instances were to go down, the system would still function. What if my API GW goes down? As it's a single entry point, the whole system goes down as well. I can create multiple API GWs and split my incoming calls to them using, eg, a Load Balancer or Elastic IPs.
+
+<img src="https://user-images.githubusercontent.com/70295997/207124826-678ed2e6-2e72-4730-a20d-9122dc271490.png" width=800>
+
 3. API GW can technically get a bit compliicated. Let's say I have a Web client for my MSs, and I have an Android team and an iOS team. These are completely different APIs and configurations. In that case, instead of overcomplicating one single GW, I can create multiple types of API GWs - one for each client type. I can have those clients call the right API GW or configure Load Balancers that route requests to the right API GW.
+
+<img src="https://user-images.githubusercontent.com/70295997/207126754-5a6bea63-4bab-40d2-b849-71d3e51379d8.png" width=600>
 
 __Backend for Frontend Pattern__
 
