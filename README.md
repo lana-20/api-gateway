@@ -8,7 +8,7 @@ The Abstraction Layer has all the APIs I want exposed to the outside world. And 
 
 With the Abstraction Service in place, I am now free to split my Backend into as many MSs as I like or refactor them as many times as I like. And I have them communicating with each other internally however I like.
 
-As long as everything is in the contract of this 'facade' service, everyone who's accessing my API from the outside doesn't need to know what I'm doing within. This 'facade' layer is called the __API Gateway__. It's a gateway at the very edge of my MS architecture diagram. As a result, it's sometimes referred to as __Edge Microservice__.
+As long as everything is in the contract of this 'facade' service, everyone who's accessing my API from the outside doesn't need to know what I'm doing within. This 'facade' layer is called the __API Gateway__. It's a gateway (GW) at the very edge of my MS architecture diagram. As a result, it's sometimes referred to as __Edge Microservice__.
 
 ### How to start using an API Gateway?
 
@@ -18,17 +18,28 @@ __What are the APIs that I'm ok with people calling?__
 
 _External API Contract_
 
-GET		/user
+<img src="https://user-images.githubusercontent.com/70295997/207100458-7a3798ae-eab1-4dbd-9142-9736f0f03408.png" width=800>
 
-POST	/user
+What's that Contract going to look like? First, I design/craft my APIs. Then I bring in this MS that acts as a Gateway. I either write my own or use one of the available technologies. I basically create a bunch of APIs in accordance with this public API that I decided to expose. All it does internally is calling one of my existing MSs and passing along the response. This technique is called __API Composition__. I compose an API out of other existing APIs.
 
-GET		/cart/<id>
-  
-PUT		/cart
-  
-POST	/cart
-  
-...		
+Since now I have a single point of entry that all my requests need to go through, there is a number of other things I can take advantage of. Eg, add a Monitoring system that measures how many requests come in, how long they take, etc. This is great for the Operation and Support teams.
 
 
+I can Authenticate a user here, pass security tokens like JWT, implement security measures and prevent things like Denial of Service attacks, prevent access to certain users and IPs, etc. If I end up needing to do all this stuff, then I may consider not writing my own API and looking at other existing technologies. There a bunch of options to choose from.
+
+__Open source API Gateway Implementations__
+
+One popular choice is the API GW Implementation from the Netflix MS stack called Zuul. I download and configure Zuul and run it whenever my MSs run. And that then acts as my API GW.
+
+There are other options, including hosted implementations like AWS. No matter which one I use, the pattern is more or less the same.
+
+__Disadvantages of using API GW pattern__
+
+1. I add a Network Hub here. Things may slow down, there's nothing I can do about it since the pattern requires it.
+2. How many of these API GWs do I need? Do I just create one? One can be a problem. I build MSs with fault tolerance and redundancy in mind, so even if some of these instances were to go down, the system would still function. What if my API GW goes down? As it's a single entry point, the whole system goes down as well. I can create multiple API GWs and split my incoming calls to them using, eg, a Load Balancer or Elastic IPs.
+3. API GW can technically get a bit compliicated. Let's say I have a Web client for my MSs, and I have an Android team and an iOS team. These are completely different APIs and configurations. In that case, instead of overcomplicating one single GW, I can create multiple types of API GWs - one for each client type. I can have those clients call the right API GW or configure Load Balancers that route requests to the right API GW.
+
+__Backend for Frontend Pattern__
+
+I create a Backend endpoint for the Frontend that's calling it. Frontend developers use my API GW as the one endpoint that they need to call. Once they refactor al their code to call my GW, I'm free to do whatever I like in my MS Architecture. As long as I observe the _External API Contract_.
 
