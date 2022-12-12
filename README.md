@@ -24,12 +24,15 @@ What's that Contract going to look like? First, I design/craft my APIs. Then I b
 
 Since now I have a single point of entry that all my requests need to go through, there is a number of other things I can take advantage of. Eg, add a Monitoring system that measures how many requests come in, how long they take, etc. This is great for the Operation and Support teams.
 
+<img src="https://user-images.githubusercontent.com/70295997/207110363-3b56be18-d8f5-4e91-a7e9-067c6b453a64.png" width=800>
 
 I can Authenticate a user here, pass security tokens like JWT, implement security measures and prevent things like Denial of Service attacks, prevent access to certain users and IPs, etc. If I end up needing to do all this stuff, then I may consider not writing my own API and looking at other existing technologies. There a bunch of options to choose from.
 
 __Open source API Gateway Implementations__
 
 One popular choice is the API GW Implementation from the Netflix MS stack called Zuul. I download and configure Zuul and run it whenever my MSs run. And that then acts as my API GW.
+
+<img src="https://user-images.githubusercontent.com/70295997/207111137-54291333-2ff2-4761-86b2-eea86d3be982.png" width=600>
 
 There are other options, including hosted implementations like AWS. No matter which one I use, the pattern is more or less the same.
 
