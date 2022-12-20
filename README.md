@@ -58,3 +58,6 @@ I create a Backend endpoint for the Frontend that's calling it. Frontend develop
 
 [What is an API Gateway? - IBM](https://youtu.be/hWRRdICvMNs)
 
+[Amazon API Gateway](https://aws.amazon.com/api-gateway/)
+
+[What does an API gateway do? - Redhat](https://www.redhat.com/en/topics/api/what-does-an-api-gateway-do)
