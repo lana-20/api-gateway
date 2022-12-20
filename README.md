@@ -53,3 +53,8 @@ __Backend for Frontend Pattern__
 
 I create a Backend endpoint for the Frontend that's calling it. Frontend developers use my API GW as the one endpoint that they need to call. Once they refactor al their code to call my GW, I'm free to do whatever I like in my MS Architecture. As long as I observe the _External API Contract_.
 
+
+----
+
+[What is an API Gateway? - IBM](https://youtu.be/hWRRdICvMNs)
+
